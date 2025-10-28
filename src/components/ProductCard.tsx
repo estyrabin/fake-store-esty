@@ -7,6 +7,8 @@ import type { Product } from "@/models/models";
 export default function ProductCard({ product }: { product: Product }) {
   const addToCart = useShopStore((s) => s.addToCart);
   const addToWishlist = useShopStore((s) => s.addToWishlist);
+  const removeFromWishlist = useShopStore((s) => s.removeFromWishlist);
+  const isSaved = useShopStore((s) => Boolean(s.wishlist[product.id]));
 
   return (
     <div className="group rounded-lg border bg-white hover:shadow-md transition overflow-hidden">
@@ -31,8 +33,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <button className="flex-1 rounded-md border px-3 py-2 text-sm" onClick={() => addToCart(product, 1)}>
           Add to cart
         </button>
-        <button className="rounded-md border px-3 py-2 text-sm" onClick={() => addToWishlist(product)}>
-          Save
+        <button className="rounded-md border px-3 py-2 text-sm" onClick={() => (isSaved ? removeFromWishlist(product.id) : addToWishlist(product))}>
+          {isSaved ? "Unsave" : "Save"}
         </button>
       </div>
     </div>

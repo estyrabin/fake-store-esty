@@ -1,16 +1,24 @@
 "use client";
 import Image from "next/image";
 import { useShopStore } from "@/hooks/useShopStore";
+import { useShallow } from "zustand/react/shallow";
 
 export default function CheckoutPage() {
-  const { cartItems, updateQuantity, removeFromCart, getCartTotal, clearCart } =
-    useShopStore((s) => ({
+  const {
+    cartItems,
+    updateQuantity,
+    removeFromCart,
+    getCartTotal,
+    clearCart,
+  } = useShopStore(
+    useShallow((s) => ({
       cartItems: s.cartItems,
       updateQuantity: s.updateQuantity,
       removeFromCart: s.removeFromCart,
       getCartTotal: s.getCartTotal,
       clearCart: s.clearCart,
-    }));
+    }))
+  );
 
   const items = Object.values(cartItems);
   const total = getCartTotal();
@@ -27,12 +35,7 @@ export default function CheckoutPage() {
             {items.map(({ product, quantity }) => (
               <div key={product.id} className="flex items-center gap-4 rounded-md border p-4">
                 <div className="relative h-20 w-20 bg-gray-50">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-contain p-2"
-                  />
+                  <Image src={product.image} alt={product.title} fill className="object-contain p-2" />
                 </div>
 
                 <div className="flex-1 min-w-0">
@@ -41,16 +44,10 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity - 1)}>
-                    -
-                  </button>
+                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity - 1)}>-</button>
                   <span className="w-6 text-center text-sm">{quantity}</span>
-                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity + 1)}>
-                    +
-                  </button>
-                  <button className="rounded-md border px-3 py-1 text-sm" onClick={() => removeFromCart(product.id)}>
-                    Remove
-                  </button>
+                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity + 1)}>+</button>
+                  <button className="rounded-md border px-3 py-1 text-sm" onClick={() => removeFromCart(product.id)}>Remove</button>
                 </div>
               </div>
             ))}

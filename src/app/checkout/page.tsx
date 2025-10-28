@@ -9,66 +9,102 @@ export default function CheckoutPage() {
     removeFromCart,
     getCartTotal,
     clearCart,
-  } = useShopStore(); 
+  } = useShopStore();
 
   const items = Object.values(cartItems);
   const total = getCartTotal();
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-medium">Checkout</h1>
+    <div className="max-w-4xl mx-auto pt-6 space-y-8">
+      {/* Title */}
+      <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <span className="text-neutral-900">Order </span>
+        <span className="text-[#FFC300]">Summary</span>
+      </h1>
 
       {items.length === 0 ? (
         <p className="text-sm text-gray-600">Your cart is empty.</p>
       ) : (
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-6">
+          {/* Items list */}
+          <div className="divide-y">
             {items.map(({ product, quantity }) => (
-              <div key={product.id} className="flex items-center gap-4 rounded-md border p-4">
-                <div className="relative h-20 w-20 bg-gray-50">
-                  <Image src={product.image} alt={product.title} fill className="object-contain p-2" />
+              <div key={product.id} className="py-5 flex items-center gap-4">
+                {/* image */}
+                <div className="relative h-24 w-24 shrink-0 rounded-md overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
 
+                {/* title + controls */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm line-clamp-1">{product.title}</p>
-                  <p className="text-sm font-medium">${product.price.toFixed(2)}</p>
-                </div>
+                  <p className="font-semibold text-lg leading-snug line-clamp-2">
+                    {product.title}
+                  </p>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    className="rounded-md border px-2 py-1"
-                    onClick={() => updateQuantity(product.id, Math.max(0, quantity - 1))}
-                  >
-                    -
-                  </button>
-                  <span className="w-6 text-center text-sm">{quantity}</span>
-                  <button
-                    className="rounded-md border px-2 py-1"
-                    onClick={() => updateQuantity(product.id, quantity + 1)}
-                  >
-                    +
-                  </button>
-                  <button
-                    className="rounded-md border px-3 py-1 text-sm"
-                    onClick={() => removeFromCart(product.id)}
-                  >
-                    Remove
-                  </button>
+                  {/* quantity row styled like “- 1 +” */}
+                  <div className="mt-2 flex items-center gap-3 text-lg">
+                    <button
+                      className="px-2 leading-none hover:opacity-80"
+                      onClick={() =>
+                        updateQuantity(product.id, Math.max(0, quantity - 1))
+                      }
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+                    <span className="w-6 text-center text-base">{quantity}</span>
+                    <button
+                      className="px-2 leading-none hover:opacity-80"
+                      onClick={() => updateQuantity(product.id, quantity + 1)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+
+                    {/* keep logic; style as subtle link */}
+                    <button
+                      className="ml-4 text-xs text-neutral-500 hover:text-neutral-800 underline underline-offset-4"
+                      onClick={() => removeFromCart(product.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="rounded-md border p-4 space-y-4 h-fit">
-            <h2 className="text-lg font-medium">Order Summary</h2>
-            <div className="flex items-center justify-between">
-              <span>Total</span>
-              <span className="font-semibold">${total.toFixed(2)}</span>
+          {/* total + CTA */}
+          <div className="pt-4 border-t">
+            <div className="flex items-center justify-between py-4 border-b">
+              <span className="text-2xl md:text-3xl font-extrabold">
+                <span className="text-[#FFC300]">TOTAL:</span>{" "}
+                <span className="text-neutral-900">
+                  {total.toFixed(2)} $
+                </span>
+              </span>
+
+              <button
+                className="whitespace-nowrap px-5 py-2 text-xs font-extrabold uppercase tracking-wide bg-[#FFC300] hover:bg-[#e5ac00] text-black rounded-sm transition"
+                onClick={() => {/* keep behavior if you add later */}}
+              >
+                Complete Order
+              </button>
             </div>
-            <button className="w-full rounded-md bg-black text-white px-4 py-2">Pay now</button>
-            <button className="w-full rounded-md border px-4 py-2" onClick={() => clearCart()}>
-              Clear cart
-            </button>
+
+            <div className="mt-4 flex items-center gap-3">
+              <button
+                className="px-4 py-2 text-xs font-medium border rounded-sm hover:bg-neutral-50"
+                onClick={() => clearCart()}
+              >
+                Clear cart
+              </button>
+            </div>
           </div>
         </div>
       )}

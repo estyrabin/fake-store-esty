@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { fetchProductById } from "@/services/fetch";
 import type { Product } from "@/models/models";
-import ClientButtons from "./ClientButtons";
 
 export default async function ProductDetails({
   params,

@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useShopStore } from "@/hooks/useShopStore";
-import { useShallow } from "zustand/react/shallow";
 
 export default function CheckoutPage() {
   const {
@@ -10,15 +9,7 @@ export default function CheckoutPage() {
     removeFromCart,
     getCartTotal,
     clearCart,
-  } = useShopStore(
-    useShallow((s) => ({
-      cartItems: s.cartItems,
-      updateQuantity: s.updateQuantity,
-      removeFromCart: s.removeFromCart,
-      getCartTotal: s.getCartTotal,
-      clearCart: s.clearCart,
-    }))
-  );
+  } = useShopStore(); 
 
   const items = Object.values(cartItems);
   const total = getCartTotal();
@@ -44,10 +35,25 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity - 1)}>-</button>
+                  <button
+                    className="rounded-md border px-2 py-1"
+                    onClick={() => updateQuantity(product.id, Math.max(0, quantity - 1))}
+                  >
+                    -
+                  </button>
                   <span className="w-6 text-center text-sm">{quantity}</span>
-                  <button className="rounded-md border px-2 py-1" onClick={() => updateQuantity(product.id, quantity + 1)}>+</button>
-                  <button className="rounded-md border px-3 py-1 text-sm" onClick={() => removeFromCart(product.id)}>Remove</button>
+                  <button
+                    className="rounded-md border px-2 py-1"
+                    onClick={() => updateQuantity(product.id, quantity + 1)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="rounded-md border px-3 py-1 text-sm"
+                    onClick={() => removeFromCart(product.id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}
@@ -60,7 +66,9 @@ export default function CheckoutPage() {
               <span className="font-semibold">${total.toFixed(2)}</span>
             </div>
             <button className="w-full rounded-md bg-black text-white px-4 py-2">Pay now</button>
-            <button className="w-full rounded-md border px-4 py-2" onClick={() => clearCart()}>Clear cart</button>
+            <button className="w-full rounded-md border px-4 py-2" onClick={() => clearCart()}>
+              Clear cart
+            </button>
           </div>
         </div>
       )}

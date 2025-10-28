@@ -12,9 +12,6 @@ export default async function Home() {
       </section>
 
       <section>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-medium">Featured Products</h2>
-        </div>
         <ProductList products={products} />
       </section>
     </div>

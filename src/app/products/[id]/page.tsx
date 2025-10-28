@@ -6,9 +6,9 @@ import type { Product } from "@/models/models";
 export default async function ProductDetails({
   params,
 }: {
-  params: Promise<{ id: string }>; // 👈 שימי לב: Promise
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;     // 👈 חובה await
+  const { id } = await params;  
   const product: Product = await fetchProductById(id);
 
   return (

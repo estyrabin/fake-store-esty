@@ -8,7 +8,7 @@ import { useShopStore } from "@/hooks/useShopStore";
 export default function Header() {
   const pathname = usePathname();
   const cartCount = useShopStore((s) => s.getCartCount());
-  const wishlistCount = useShopStore((s) => s.getWishlistCount());
+  const wishlistCount = useShopStore((s) => s.getCartCount());
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

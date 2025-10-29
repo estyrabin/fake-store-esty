@@ -3,13 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useShopStore } from "@/hooks/useShopStore";
 import type { Product } from "@/models/models";
+import AddToCartButton from "@/components/AddToCartButton";
+import AddToWishlistButton from "@/components/AddToWishlistButton";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const addToCart = useShopStore((s) => s.addToCart);
-  const addToWishlist = useShopStore((s) => s.addToWishlist);
-  const removeFromWishlist = useShopStore((s) => s.removeFromWishlist);
-  const isSaved = useShopStore((s) => Boolean(s.wishlist[product.id]));
-
   return (
     <div className="rounded-lg border bg-white text-center hover:shadow-lg transition overflow-hidden">
 
@@ -37,28 +34,11 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
         </div>
       </Link>
-
-      <div className="flex items-center gap-2 px-3 pb-4">
-
-        <button
-          className="flex-1 bg-[#FFC300] hover:bg-[#e5ac00] text-[12px] font-semibold text-black py-2 rounded-sm transition"
-          onClick={() => addToCart(product, 1)}
-        >
-          🛒 ADD TO CART
-        </button>
-
-        <button
-          className="border rounded-sm px-2 py-2 text-[11px] hover:bg-neutral-100"
-          onClick={() =>
-            isSaved
-              ? removeFromWishlist(product.id)
-              : addToWishlist(product)
-          }
-        >
-          {isSaved ? "♥" : "♡"}
-        </button>
-
+      <div className="flex gap-2 justify-center items-center">
+        <AddToCartButton product={product} />
+        <AddToWishlistButton product={product} />
       </div>
+
     </div>
   );
 }

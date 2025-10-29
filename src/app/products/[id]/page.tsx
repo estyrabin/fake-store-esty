@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { fetchProductById } from "@/services/fetch";
 import type { Product } from "@/models/models";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "../../../components/AddToCartButton";
 
 const CATEGORY_MAP: Record<string, string> = {
     "men's clothing": "mens-clothing",

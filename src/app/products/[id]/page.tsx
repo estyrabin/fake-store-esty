@@ -6,15 +6,25 @@ import { fetchProductById } from "@/services/fetch";
 import type { Product } from "@/models/models";
 import AddToCartButton from "./AddToCartButton";
 
+const CATEGORY_MAP: Record<string, string> = {
+    "men's clothing": "mens-clothing",
+    "women's clothing": "womens-clothing",
+    "jewelery": "jewelry",
+    "electronics": "electronics",
+};
+
+
 export default async function ProductDetails({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product: Product = await fetchProductById(id);
+  const category  = CATEGORY_MAP[product.category] ?? product.category;
+  console.log("Product Details - Product:", product);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 space-y-10">
 
       <Link
-        href={`/category/${product.category}`}
+        href={`/category/${category}`}
         className="inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
       >
         ← Back to {product.category}

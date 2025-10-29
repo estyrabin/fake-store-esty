@@ -8,6 +8,8 @@ import { useShopStore } from "@/hooks/useShopStore";
 export default function Header() {
   const pathname = usePathname();
   const cartCount = useShopStore((s) => s.getCartCount());
+  const wishlistCount = useShopStore((s) => s.getWishlistCount());
+
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -48,13 +50,21 @@ export default function Header() {
               <Link href="/connect" className={`${linkBase} ${isActive("/connect") ? active : ""}`}>Contact Us</Link>
             </nav>
 
-            <Link
-              href="/checkout"
-              className="text-[13px] tracking-wide text-neutral-900 hover:text-[#FFC300] transition-colors"
-            >
-              Cart ({mounted ? cartCount : 0})
-            </Link>
+            <div className="flex items-center gap-4 text-[13px] tracking-wide">
+              <Link
+                href="/wishlist"
+                className="hover:text-[#FFC300] transition-colors"
+              >
+                Wishlist ({mounted ? wishlistCount : 0})
+              </Link>
 
+              <Link
+                href="/checkout"
+                className="hover:text-[#FFC300] transition-colors"
+              >
+                Cart ({mounted ? cartCount : 0})
+              </Link>
+            </div>
           </div>
         </div>
       </div>

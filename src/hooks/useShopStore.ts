@@ -14,6 +14,8 @@ type ShopState = {
 	removeFromWishlist: (productId: number) => void;
 	getCartCount: () => number;
 	getCartTotal: () => number;
+	getWishlistCount: () => number;
+
 };
 
 export const useShopStore = create<ShopState>()(
@@ -64,12 +66,14 @@ export const useShopStore = create<ShopState>()(
 					return { wishlist: rest };
 				}),
 			getCartCount: () =>
-				Object.values(get().cartItems).reduce((sum, item) => sum + item.quantity, 0),
+				Object.values(get().cartItems).reduce((sum, item) => sum + item.quantity, 0
+		),
 			getCartTotal: () =>
 				Object.values(get().cartItems).reduce(
 					(sum, item) => sum + item.product.price * item.quantity,
 					0
 				),
+			getWishlistCount: () => Object.keys(get().wishlist).length,
 		}),
 		{ name: "shop-storage" }
 	)

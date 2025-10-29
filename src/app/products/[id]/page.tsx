@@ -13,7 +13,6 @@ export default async function ProductDetails({ params }: { params: Promise<{ id:
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 space-y-10">
 
-      {/* Back link */}
       <Link
         href={`/category/${product.category}`}
         className="inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
@@ -21,10 +20,8 @@ export default async function ProductDetails({ params }: { params: Promise<{ id:
         ← Back to {product.category}
       </Link>
 
-      {/* Main Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
-        {/* Product Image */}
         <div className="relative w-full h-[350px] md:h-[420px]">
           <Image
             src={product.image}
@@ -35,7 +32,6 @@ export default async function ProductDetails({ params }: { params: Promise<{ id:
           />
         </div>
 
-        {/* Product Info */}
         <div className="space-y-4">
           <h1 className="text-3xl font-extrabold leading-snug">
             {product.title}
@@ -53,7 +49,6 @@ export default async function ProductDetails({ params }: { params: Promise<{ id:
             {product.description}
           </p>
 
-          {/* ✅ Add to Cart Button */}
           <AddToCartButton product={product} />
         </div>
 

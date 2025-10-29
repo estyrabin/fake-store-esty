@@ -1,5 +1,3 @@
-// app/products/[id]/page.tsx  (Server Component)
-
 import Image from "next/image";
 import Link from "next/link";
 import { fetchProductById } from "@/services/fetch";

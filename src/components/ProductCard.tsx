@@ -38,7 +38,6 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </Link>
 
-      {/* ✅ Bottom Buttons */}
       <div className="flex items-center gap-2 px-3 pb-4">
 
         <button
@@ -48,7 +47,6 @@ export default function ProductCard({ product }: { product: Product }) {
           🛒 ADD TO CART
         </button>
 
-        {/* שומרים את הלוגיקה שלך */}
         <button
           className="border rounded-sm px-2 py-2 text-[11px] hover:bg-neutral-100"
           onClick={() =>

@@ -1,11 +1,13 @@
+import styles from './ConnectPage.module.css';
+
 export default function ConnectPage() {
   return (
-    <div className="space-y-4">
-      <h1 className="text-xl font-medium">Connect Us</h1>
-      <p className="text-sm text-gray-600">We'd love to hear from you.</p>
-      <div className="rounded-md border p-4 space-y-3">
-        <p className="text-sm">Email: store@store.com</p>
-        <p className="text-sm">Phone:0532222222</p>
+    <div className={styles.wrap}>
+      <h1 className={styles.heading}>Connect Us</h1>
+      <p className={styles.subheading}>We'd love to hear from you.</p>
+      <div className={styles.contactBox}>
+        <p className={styles.contactItem}>Email: store@store.com</p>
+        <p className={styles.contactItem}>Phone:0532222222</p>
       </div>
     </div>
   );

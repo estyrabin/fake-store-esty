@@ -1,9 +1,10 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import type { Product } from "@/models/models";
+import styles from './ProductList.module.css';
 
 export default function ProductList({ products }: { products: Product[] }) {
 	return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className={styles.grid}>
             {products.map((p) => (
                 <ProductCard key={p.id} product={p} />
             ))}

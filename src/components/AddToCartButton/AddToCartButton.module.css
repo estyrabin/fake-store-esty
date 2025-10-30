@@ -1,0 +1,16 @@
+.addToCartButton {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: #ffc300;
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  transition: background 0.18s;
+  border: none;
+}
+.addToCartButton:hover {
+  background: #e5ac00;
+}
